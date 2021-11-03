@@ -15,22 +15,34 @@ playButton.addEventListener('click', function(){
  
   let selectedDifficulty = parseInt( document.getElementById('difficulty').value);
   console.log(selectedDifficulty);
+
+  let squaresNumber;
   
   // creazione griglia in base alla difficoltà
   if(selectedDifficulty === 1){
-    createSquares(100);
+    squaresNumber = 100;
 
    }else if(selectedDifficulty === 2){
-    createSquares(81);   
+    squaresNumber = 81;   
 
   }else{
-    createSquares(49);
+    squaresNumber = 49;
   };
 
-  //funzione per creare la griglia
-  function createSquares (squaresNumber){
+  createSquares();
 
-    for(i = 0 ; i < squaresNumber; i++){
+
+  //creazione bombe  
+  const bombs = bombsGenerator(16);
+  console.log('bombs', bombs);  
+
+
+  
+
+  //funzione per creare la griglia
+  function createSquares (){
+
+    for(let i = 0 ; i < squaresNumber; i++){
 
       const square = document.createElement('div');
       square.className = 'square';
@@ -46,9 +58,7 @@ playButton.addEventListener('click', function(){
         square.classList.add('crazy');   
   
       };
-
-      console.log(square);
-      
+        
       square.addEventListener('click', function(){
         this.classList.add('clicked');    
       });    
@@ -57,9 +67,35 @@ playButton.addEventListener('click', function(){
 
     };
   
-  }
+  };
+ 
+
+  //funzione per generare le bombe
+  function bombsGenerator (bombsNumber){
+
+    const bombs = [];
+
+    while(bombs.length < bombsNumber){
+
+      const bomb = getRandomNumber(1, squaresNumber);
+
+      if(!bombs.includes(bomb)){
+        bombs.push(bomb);
+      };    
+
+    };
+
+    return bombs;
+  };
+
+
 
 });
 
+
+//funzione numero random
+function getRandomNumber(min, max) {
+  return Math.floor(Math.random() * (max - min + 1) ) + min;
+}
 
 
