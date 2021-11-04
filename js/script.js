@@ -31,13 +31,15 @@ playButton.addEventListener('click', function(){
 
   createSquares();
 
+  
+
 
   //creazione bombe  
   const bombs = bombsGenerator(16);
   console.log('bombs', bombs);  
 
 
-  
+
 
   //funzione per creare la griglia
   function createSquares (){
@@ -58,14 +60,25 @@ playButton.addEventListener('click', function(){
         square.classList.add('crazy');   
   
       };
-        
+      
+   
+      //click sulla casella
       square.addEventListener('click', function(){
         this.classList.add('clicked');    
-      });    
-    
-      grid.append(square);
+        
+        
+        if(bombs.includes(parseInt(event.target.innerText))){
+          this.classList.add('bomb'); 
+                   
+        }; 
+       
+
+      });   
+
+      grid.append(square);      
 
     };
+   
   
   };
  
@@ -78,7 +91,7 @@ playButton.addEventListener('click', function(){
     while(bombs.length < bombsNumber){
 
       const bomb = getRandomNumber(1, squaresNumber);
-
+      
       if(!bombs.includes(bomb)){
         bombs.push(bomb);
       };    
@@ -96,6 +109,6 @@ playButton.addEventListener('click', function(){
 //funzione numero random
 function getRandomNumber(min, max) {
   return Math.floor(Math.random() * (max - min + 1) ) + min;
-}
+};
 
 

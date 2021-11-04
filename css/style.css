@@ -60,6 +60,10 @@ main .default-text {
   color: white;
 }
 
+.square.clicked.bomb {
+  background-color:  #DB133D;
+}
+
 .square.easy {
   width: calc(100% / 10);
   height: calc(100% / 10);
